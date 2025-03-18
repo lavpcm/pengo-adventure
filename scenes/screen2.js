@@ -1,3 +1,5 @@
+import { game } from "../main.js";
+
 export default class scene2 extends Phaser.Scene {
     constructor() {
         super("screen2"); // chama o construtor da classe Phaser.Scene com o identificador "screen2"
@@ -11,6 +13,8 @@ export default class scene2 extends Phaser.Scene {
         this.load.spritesheet('robot', 'assets/sprite-robot.png', { frameWidth: 32, frameHeight: 32 });
         // carrega a imagem do peixe
         this.load.image('fish', 'assets/fish.png');
+        // carrega a imagem do peixe 2
+        this.load.image('fish2', 'assets/fish2.png');
     }
 
     create() {
@@ -63,7 +67,12 @@ export default class scene2 extends Phaser.Scene {
         this.fishes = this.physics.add.staticGroup();
         this.fishPositions = maze.getObjectLayer("Camada de Objetos 1");
         this.fishPositions.objects.forEach((fish) => {
-            this.fishes.create(fish.x, fish.y, "fish").setScale(0.1).refreshBody(); // adiciona os peixes no mapa
+            //verifica tipo de dispositivo
+            if (game.device.os.desktop){
+                this.fishes.create(fish.x, fish.y, "fish").setScale(0.1).refreshBody(); // adiciona os peixes no mapa
+            } else{
+                this.fishes.create(fish.x, fish.y, "fish2").setScale(0.1).refreshBody(); // adiciona os peixes no mapa
+            }            
         });
 
         // adiciona colisão entre o pinguim e os peixes

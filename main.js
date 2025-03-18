@@ -25,4 +25,4 @@ const config = {
   pixelArt: true
 };
 
-var game = new Phaser.Game(config);
+export const game = new Phaser.Game(config);
